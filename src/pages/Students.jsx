@@ -6,6 +6,31 @@ import Loding from "../components/Loding";
 function Students() {
     const [loding,setLoding]=useState([true]);
     const [students,setStudents]=useState([]);
+    const deleteStudent =(e ,id)=>{
+        e.preventDefault();
+        const thisClicked = e.currentTarget;
+        thisClicked.innerText = "Deleting...";
+        axios.delete(`http://127.0.0.1:8000/api/student/delete/${id}`).then(res=>{
+            alert(res.data.message);
+            thisClicked.closest("tr").remove();
+
+
+        })
+        .catch(function (errors) {
+            if (errors.response) {
+              
+              if (errors.response.status === 404) {
+                alert(errors.response.data.error);
+                thisClicked.innerText = "Delete";
+
+              }
+              if (errors.response.status === 500) {
+                alert(errors.response.data);
+              }
+            }
+          });
+
+    }
     
     useEffect(()=>{
 
@@ -37,7 +62,7 @@ function Students() {
                     <Link className="btn btn-primary " to={`/student/update/${student.id}`}>Edit</Link>
                 </td>
                 <td >
-                    <button className="btn btn-danger" type="button">Delete</button>
+                    <button className="btn btn-danger" onClick={(e)=>deleteStudent(e,student.id)} type="button">Delete</button>
                 </td>
             </tr>
         )
