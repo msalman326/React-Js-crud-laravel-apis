@@ -36,7 +36,3 @@
     transform: rotate(360deg);
   }
 }
-.cbtn:hover{
-  color: black;
-  background-color: blue;
-}

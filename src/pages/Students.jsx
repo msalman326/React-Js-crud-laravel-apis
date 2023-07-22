@@ -37,7 +37,7 @@ function Students() {
                     <Link className="btn btn-primary " to={`/student/update/${student.id}`}>Edit</Link>
                 </td>
                 <td >
-                    <Link className="btn btn-danger " to="/">Delete</Link>
+                    <button className="btn btn-danger" type="button">Delete</button>
                 </td>
             </tr>
         )
